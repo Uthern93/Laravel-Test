@@ -11,30 +11,30 @@
 Project Structure
 This assessment consists of two pages:
 
-1.Form Page
+1.Form Page<br>
 2.Table Page
 
 Form Page <br>
 Create a form page that allows users to input data. The form should include the following fields:
 
-name: Input text<br>
-email: Input email<br>
-password: Input password<br>
-gender: Select with options (Male/Female)<br>
-birthday: Input date<br>
-status active: Checkbox<br>
-submit: Button to save data<br>
-go to table page: Button to navigate to the Table Page<br>
+<ul>name: Input text<br>
+<ul>email: Input email<br>
+<ul>password: Input password<br>
+<ul>gender: Select with options (Male/Female)<br>
+<ul>birthday: Input date<br>
+<ul>status active: Checkbox<br>
+<ul>submit: Button to save data<br>
+<ul>go to table page: Button to navigate to the Table Page<br>
 
 Table Page<br>
 Display all users with active status in a table. The table should show the following columns:
 
-id<br>
-name<br>
-email<br>
-gender<br>
-birthday (in dd/mm/yyyy format)<br>
-created at (formatted for readability)<br>
-delete button: Soft delete functionality to delete the user<br>
+<ul>id<br>
+<ul>name<br>
+<ul>email<br>
+<ul>gender<br>
+<ul>birthday (in dd/mm/yyyy format)<br>
+<ul>created at (formatted for readability)<br>
+<ul>delete button: Soft delete functionality to delete the user<br>
 
 
