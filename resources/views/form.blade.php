@@ -1,5 +1,9 @@
 <?php
-    
+$Email = "";
+
+    if (isset($_POST["submitBtn"])) { 
+        $email = $_REQUEST['email'];         
+    } 
 ?>
 
 <!DOCTYPE html>
@@ -28,7 +32,7 @@
             </header>
         </div>
 
-        <form onsubmit="return saveData()" action="/form" method="POST" id="submission">
+        <form onsubmit="return saveData()" action="{{ route('store', ['Email' => $Email]) }}" method="POST" id="submission">
             @csrf
             <label for="name" class="form-label">Please Enter Your Full Name:</label>
             <input type="text" id="name" class="form-control" name="name" required>
@@ -63,7 +67,7 @@
                 <input type="radio" id="status" name="status" value="No">
                 <label for="not active">No</label><br>
 
-                <input id="Button1" type="submit" value="Submit">
+                <input id="Button1" name="submitBtn" type="submit" value="Submit">
 
         </form>
 
@@ -73,7 +77,7 @@
             </form>
         </div>
 
-        
+        <div class="msgbox2">{{ session('err') }}</div>
             
     </body>
 </html>

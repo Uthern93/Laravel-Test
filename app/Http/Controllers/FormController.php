@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 // ActiveUser represent table from database
 use App\Models\ActiveUser;
+use Illuminate\Support\Facades\DB;
 
 class FormController extends Controller
 {
@@ -34,9 +35,18 @@ class FormController extends Controller
     }
 
     //Controller function to store data to database
-    public function store() 
+    public function store(Request $request) 
     {
+        DB::beginTransaction();
+
+    try {
         $ActiveUsers=new ActiveUser();
+        
+        $Email = $request->input('Email');
+        if (ActiveUser::where('email', $Email)->exists())
+        {
+            return redirect()->route('form')->with('err', 'Your email has already been used!');
+        } else {
 
         // request data from an input item 
         // the naming for it have to be the same as column name for the table
@@ -51,6 +61,19 @@ class FormController extends Controller
         $ActiveUsers->save();
 
         return redirect('/')->with('msg', 'Your data has successfully submitted !');
+        }
+
+        DB::commit();
+
+        return redirect()->route('home')->with('msg', 'Your data has been successfully submitted!');
+
+    } catch (\Exception $e) {
+
+        DB::rollBack();
+
+        return redirect()->route('form')->with('err', 'Your email has already been used!');
+    }
+        
     }
 
     //Controller function to remove data from database

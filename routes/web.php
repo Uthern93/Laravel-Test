@@ -18,7 +18,7 @@ Route::get('/', [FormController::class, 'home'])->name('home');
 
 Route::get('/form', [FormController::class, 'form'])->name('form');
 
-Route::post('/form', [FormController::class, 'store']);
+Route::post('/form', [FormController::class, 'store'])->name('store');
 
 Route::get('/table', [FormController::class, 'table'])->name('table');
 
