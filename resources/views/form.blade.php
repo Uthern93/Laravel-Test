@@ -32,7 +32,9 @@ $Email = "";
             </header>
         </div>
 
-        <form onsubmit="return saveData()" action="{{ route('store', ['Email' => $Email]) }}" method="POST" id="submission">
+        <div class="msgbox2">{{ session('err') }}</div>
+
+        <form onsubmit="return saveData()" action="{{ route('store') }}" method="POST" id="submission">
             @csrf
             <label for="name" class="form-label">Please Enter Your Full Name:</label>
             <input type="text" id="name" class="form-control" name="name" required>
@@ -41,8 +43,7 @@ $Email = "";
             <input type="email" id="email" class="form-control" name="email" required>
 
             <label for="password" class="form-label">Please Enter Your Password:</label>
-            <input type="password" id="password" class="form-control" name="password" required minlength="8" 
-            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
+            <input type="password" id="password" class="form-control" name="password" required minlength="8" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
             <br>
 
             <label for="Gender" class="form-label">Please Select Your Gender:</label>
@@ -77,7 +78,6 @@ $Email = "";
             </form>
         </div>
 
-        <div class="msgbox2">{{ session('err') }}</div>
             
     </body>
 </html>

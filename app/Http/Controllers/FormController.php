@@ -37,41 +37,36 @@ class FormController extends Controller
     //Controller function to store data to database
     public function store(Request $request) 
     {
-        DB::beginTransaction();
+       // Validate the incoming request data
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|unique:active_users,email',
+        'password' => 'required|min:8',
+        'Gender' => 'required|in:Male,Female',
+        'birthday' => 'required|date',
+        'status' => 'required|in:Yes,No',
+    ]);
+
 
     try {
-        $ActiveUsers=new ActiveUser();
-        
-        $Email = $request->input('Email');
-        if (ActiveUser::where('email', $Email)->exists())
-        {
-            return redirect()->route('form')->with('err', 'Your email has already been used!');
-        } else {
+        $activeUsers = new ActiveUser();
 
-        // request data from an input item 
-        // the naming for it have to be the same as column name for the table
-        $ActiveUsers->name=request('name');
-        $ActiveUsers->email=request('email');
-        $ActiveUsers->password=request('password');
-        $ActiveUsers->gender=request('Gender');
-        $ActiveUsers->birthday=request('birthday');
-        $ActiveUsers->status=request('status');
-        $ActiveUsers->created_at=now();
+        // Assign values directly, no need to use request() function
+        $activeUsers->name = $request->input('name');
+        $activeUsers->email = $request->input('email');
+        $activeUsers->password = $request->input('password');
+        $activeUsers->gender = $request->input('Gender');
+        $activeUsers->birthday = $request->input('birthday');
+        $activeUsers->status = $request->input('status');
+        $activeUsers->created_at = now();
 
-        $ActiveUsers->save();
+        $activeUsers->save();
 
         return redirect('/')->with('msg', 'Your data has successfully submitted !');
-        }
-
-        DB::commit();
-
-        return redirect()->route('home')->with('msg', 'Your data has been successfully submitted!');
-
+        
     } catch (\Exception $e) {
 
-        DB::rollBack();
-
-        return redirect()->route('form')->with('err', 'Your email has already been used!');
+        return redirect()->route('form')->with('err', 'An error occurred while saving your data.');
     }
         
     }
